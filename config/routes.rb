@@ -4,4 +4,8 @@ Rails.application.routes.draw do
   root to: 'homes#top'
   get "/homes/about" => "homes#about"
 
+# resorces :userだとuninitialized constant UserControllerというエラーが出た
+  resources :books
+  resources :users
+
 end
