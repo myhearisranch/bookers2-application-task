@@ -2,6 +2,7 @@
 <%#@book.userでuserの情報を持ってこれる %>
 
 <h1>User info</h1>
+<%= image_tag @book.user.get_profile_image %>
 <%= @book.user.name %>
 <%= @book.user.introduction %>
 

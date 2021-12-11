@@ -14,5 +14,24 @@ class UsersController < ApplicationController
     @book_new = Book.new
   end
 
+  def edit
+    @user = User.find(params[:id])
+
+    #↓の2つ書いたらparamsparam is missing or the value is empty: userというエラーが出た
+    #user.update(user_params)
+   #redirect_to user_path(user.id)
+  end
+
+  def update
+      user = User.find(params[:id])
+      user.update(user_params)
+      redirect_to user_path(user.id)
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:name, :introduction, :profile_image)
+  end
 
 end
