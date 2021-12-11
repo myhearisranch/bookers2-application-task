@@ -1,0 +1,19 @@
+
+<%#bookに関する変数を使って全部表示している%>
+<h1>User info</h1>
+ <h3><%= @book.user.name %></h3>
+ <h3><%= @book.user.introduction %></h3>
+
+<h1>New book</h1>
+<%= form_with model:@book, local:true do |f| %>
+  <p>title</p>
+  <%= f.text_field :title %>
+  <p>opinion</p>
+  <%= f.text_area :opinion %>
+  <%= f.submit 'Create Book' %>
+<% end %>
+
+<h1>Book detail</h1>
+<%= @book.user.name%>
+<%= @book.title %>
+<%= @book.body %>
