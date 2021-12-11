@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   def show
-    @book = Book.new
+    @book_new = Book.new
     @user = User.find(params[:id])
 
     #bookだとエラーが出た

@@ -1,11 +1,13 @@
 
-<%#bookに関する変数を使って全部表示している%>
+<%#bookに関する変数を使って全部表示している
+bookコントローラーで@userを定義する必要なし%>
+
 <h1>User info</h1>
  <h3><%= @book.user.name %></h3>
  <h3><%= @book.user.introduction %></h3>
 
 <h1>New book</h1>
-<%= form_with model:@book, local:true do |f| %>
+<%= form_with model:@book_new, local:true do |f| %>
   <p>title</p>
   <%= f.text_field :title %>
   <p>opinion</p>

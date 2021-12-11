@@ -9,10 +9,18 @@ end
 
 def show
     @book = Book.find(params[:id])
+
+    #@bookだと↑と混同してしまう
+    @book_new = Book.new
 end
 
 def index
+    @books = Book.all
+    @book_new = Book.new
 
+    #ログインしている人の情報はcurrent_userで取得
+    #current_user.idだとidのみを取得し、エラーになる
+    @user = current_user
 end
 
 private
