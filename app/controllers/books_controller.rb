@@ -27,6 +27,12 @@ def edit
     @book = Book.find(params[:id])
 end
 
+def destroy
+    book = Book.find(params[:id])
+    book.destroy
+    redirect_to book_path
+end
+
 def update
     book = Book.find(params[:id])
     book.update(book_params)

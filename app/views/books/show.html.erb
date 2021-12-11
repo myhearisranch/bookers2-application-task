@@ -1,5 +1,5 @@
 
-<%#@book.userでuser情報を持ってこれる %>
+<%#@book.userでuserの情報を持ってこれる %>
 
 <h1>User info</h1>
 <%= @book.user.name %>
@@ -19,3 +19,5 @@
 <%= @book.user.name %>
 <p><%= @book.title %></p>
 <p><%= @book.body %></p>
+<%= link_to "Edit", edit_book_path(@book.id) %>
+<%= link_to "Delete", book_path(@book.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
