@@ -1,5 +1,10 @@
 class BooksController < ApplicationController
 
+    # https://qiita.com/nao0725/items/47606b8975603a12fd5eを参考に
+    #↓他人の編集画面に遷移しないようにする記述
+
+    before_action :correct_user, only: [:edit, :update]
+
 def create
     @book = Book.new(book_params)
     @book.user_id = current_user.id
@@ -62,7 +67,16 @@ end
 
 private
 
-def book_params
-    params.require(:book).permit(:title, :body)
-end
+    def book_params
+        params.require(:book).permit(:title, :body)
+    end
+
+    # https://qiita.com/nao0725/items/47606b8975603a12fd5eを参考に
+    #↓他人の編集画面に遷移しないようにする記述
+
+    def correct_user
+        @book = Book.find(params[:id])
+        @user = @book.user
+        redirect_to(books_path) unless @user == current_user
+    end
 end
