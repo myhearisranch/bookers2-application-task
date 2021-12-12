@@ -8,6 +8,11 @@ def create
     if @book.save
         flash[:notice]="You have updated user successfully."
         redirect_to book_path(@book.id)
+    else
+        #↓2うの変数は、indexを表示する為の変数
+        @books =Book.all
+        @user = current_user
+        render :index
     end
 end
 
@@ -38,12 +43,14 @@ def destroy
 end
 
 def update
-    book = Book.find(params[:id])
-
+    @book = Book.find(params[:id])
+    @book.user_id = current_user.id
     #フラッシュメッセージ実装
-    if book.update(book_params)
+    if @book.update(book_params)
         flash[:notice] = "You have updated user successfully."
         redirect_to book_path(book.id)
+    else
+        render :edit
     end
 end
 
