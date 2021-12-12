@@ -11,7 +11,9 @@ class User < ApplicationRecord
 
   # 1文字以上75文字以下の時は
   #validates :content, {length: {in: 1..75} }
-   validates :name, {length: {in: 2..20} }
+  validates :name, {length: {in: 2..20} }
+
+  validates :name, uniqueness: true
 
   validates :introduction, {length: {maximum: 50}}
 
