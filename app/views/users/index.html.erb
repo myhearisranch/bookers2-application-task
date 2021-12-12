@@ -4,7 +4,7 @@
 <%= @user.name %>
 <%= @user.introduction %>
 
-<%= link_to "user_edit", edit_user_path %>
+<%= link_to "user_edit", edit_user_path(@user) %>
 
 <h1>New book</h1>
 <%= form_with model:@book_new, local:true do |f| %>
@@ -20,5 +20,6 @@
 
 <h1>Users</h1>
 <% @users.each do |user| %>
+  <%= image_tag user.get_profile_image %>
   <%= user.name %>
 <% end %>

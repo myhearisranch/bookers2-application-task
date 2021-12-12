@@ -31,6 +31,10 @@
 
 <h1>Books</h1>
 <% @books.each do |book| %>
+
+<%#　ユーザーのプロフィール画像を下記で表示しようとするとundefined method `get_profile_image' for nil:NilClass %>
+<%#= image_tag book.user.get_profile_image %>
+  
   <p>Title</p>
 
   <%= link_to book_path(book.id) do %>
