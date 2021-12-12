@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
 
+   #http://hbnist76.blog.fc2.com/blog-entry-237.htmlより、
+   #他人のユーザ情報編集画面に遷移できない記述
+
+   before_action :correct_user,   only: [:edit, :update]
+
   def show
     @book_new = Book.new
     @user = User.find(params[:id])
@@ -38,8 +43,16 @@ class UsersController < ApplicationController
 
   private
 
-  def user_params
-    params.require(:user).permit(:name, :introduction, :profile_image)
-  end
+    def user_params
+      params.require(:user).permit(:name, :introduction, :profile_image)
+    end
+
+    #http://hbnist76.blog.fc2.com/blog-entry-237.htmlより、
+    #他人のユーザ情報編集画面に遷移できない記述
+
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to user_path(@user)
+    end
 
 end
