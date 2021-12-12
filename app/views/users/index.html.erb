@@ -1,7 +1,10 @@
 <h1>User info</h1>
+
 <%= image_tag @user.get_profile_image %>
 <%= @user.name %>
 <%= @user.introduction %>
+
+<%= link_to "user_edit", edit_user_path %>
 
 <h1>New book</h1>
 <%= form_with model:@book_new, local:true do |f| %>

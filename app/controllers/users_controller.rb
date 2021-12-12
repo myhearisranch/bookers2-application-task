@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
 
-   #http://hbnist76.blog.fc2.com/blog-entry-237.htmlより、
-   #他人のユーザ情報編集画面に遷移できない記述
+   # 編集画面表示、修正内容の更新アクション実行時はログインしているユーザーの場合のみ実行可とする。
+   #https://tamata78.hatenablog.com/entry/2015/12/16/205728より、
+   #↓他人のユーザ情報編集画面に遷移できない記述
+
 
    before_action :correct_user,   only: [:edit, :update]
 
@@ -47,12 +49,14 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :introduction, :profile_image)
     end
 
-    #http://hbnist76.blog.fc2.com/blog-entry-237.htmlより、
+    #https://tamata78.hatenablog.com/entry/2015/12/16/205728より、
     #他人のユーザ情報編集画面に遷移できない記述
 
     def correct_user
       @user = User.find(params[:id])
-      redirect_to user_path(@user)
+      if current_user != @user
+       redirect_to user_path(@user)
+      end
     end
 
 end
