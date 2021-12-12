@@ -49,7 +49,11 @@ end
 def destroy
     book = Book.find(params[:id])
     book.destroy
-    redirect_to book_path
+
+    #ActiveRecord::RecordNotFound in BooksController#show Couldn't find Book with 'id'=18
+    #redirect_to book_pathをredirect_to books_pathにした
+
+    redirect_to books_path
 end
 
 def update
