@@ -11,7 +11,11 @@
 <%= @user.introduction %>
 
 <h1>New book</h1>
-<%= form_with model:@book_new, local:true do |f| %>
+
+<%#@book_newだとparam is missing or the value is empty error
+  が起こる　@bookにして解決%>
+
+<%= form_with model:@book, local:true do |f| %>
 
 <p>Title</p>
 <%= f.text_area :title %>
