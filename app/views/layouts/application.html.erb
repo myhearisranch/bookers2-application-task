@@ -12,7 +12,16 @@
 
   <body>
     <header>
-      <% if user_signed_in? %>
+      <nav class="navbar navbar-expend-lg navbar-dark bg-dark">
+        <div class="container">
+          <%= link_to "Bookers" , root_path , class: "navbar-brand" %>
+        </div>
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse" id = "navbarNavDropdown" style>
+        <ul class="navbar-nav ml-auto">
+            <% if user_signed_in? %>
         <li>
           <%= link_to "Home", user_path(current_user.id) %>
         </li>
@@ -33,10 +42,22 @@
           <%= link_to "Log in", new_user_session_path %>
         </li>
         <% end %>
+        </ul>
+      </div>
+      </nav>
     </header>
 
     <%#　ログイン、新規登録、ログアウトの場合、s↓の一行だけでフラッシュメッセージを実装出来る(コントローラーに何か記述する必要なし)　%>
     <%= flash[:notice] %>
     <%= yield %>
   </body>
+  <footer>
+    <div class="container mt-5">
+      <div class="row">
+        <div class="mx-auto">
+          <p>CopyRight Infratop.inc</p>
+        </div>
+      </div>
+    </div>
+  </footer>
 </html>
