@@ -6,18 +6,18 @@
     <div class="col-md-3">
       <h2>User info</h2>
       <%#undefined method `get_profile_image' for nil:NilClass %>
-      <%#= image_tag @book.user.get_profile_image %>
+      <%= image_tag @book.user.get_profile_image %>
       <table class="table">
         <tbody>
           <tr>
             <th>name</th>
             <%# undefined method `name' for nil:NilClass %>
-            <th><%#= @book.user.name %></th>
+            <th><%= @book.user.name %></th>
           </tr>
           <tr>
             <th>introduction</th>
                 <%# undefined method `introduction' for nil:NilClass %>
-            <th><%#= @book.user.introduction %></th>
+            <th><%= @book.user.introduction %></th>
           </tr>
         </tbody>
       </table>
@@ -46,15 +46,15 @@
             <tr>
               <td>
                 <%# undefined method `id' for nil:NilClass%>
-                <%#= link_to user_path(@book.user.id) do %>
+                <%= link_to user_path(@book.user.id) do %>
 
                  <%#undefined method `get_profile_image' for nil:NilClass %>
-                 <%#= image_tag @book.user.get_profile_image %><br>
+                 <%= image_tag @book.user.get_profile_image %><br>
 
 
                   <%#undefined method `name' for nil:NilClass %>
-                 <%#= @book.user.name %>
-                <%# end %>
+                 <%= @book.user.name %>
+                <% end %>
               </td>
                 <%#文字にlinkをつける方法
                 <%= link_to list.title, list_path(list.id) %>
@@ -75,8 +75,3 @@
         </table>
     </div>
 </div>
-
-<% if @book.user == current_user %>
-  <%= link_to "Edit", edit_book_path(@book.id) %>
-  <%= link_to "Delete", book_path(@book.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-<% end %>

@@ -53,6 +53,14 @@
             <tr>
               <td>
                 <%#　ユーザーのプロフィール画像を下記で表示しようとするとundefined method `get_profile_image' for nil:NilClass %>
+                <%#binding.pryでbook.userがnill %>
+                <%# 原因、binding.pryでbookの中身のuser_idが4という存在しないuserのidになっている %>
+                
+                <%# 解決法 rails db:migrate:resetをして、新規登録,投稿をやり直した %>
+
+                <%#binding.pryの際、入力出来なかったらqを入力 %>
+
+                <%# この部分に% binding.pry %を記述してbook, book.userの中身を確認してエラーを解決した %>
                 <%= image_tag book.user.get_profile_image %>
               </td>
               <td>

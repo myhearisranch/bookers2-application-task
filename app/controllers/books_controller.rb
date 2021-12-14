@@ -7,6 +7,7 @@ class BooksController < ApplicationController
 
 def create
     @book = Book.new(book_params)
+
     @book.user_id = current_user.id
 
     #フラッシュメッセージ実装
@@ -33,7 +34,7 @@ def index
 
     #index.html.erb undifined method errors for nill
     #を解決する為に記述
-    #/bookでindex.html.erbを表示する際に必要
+    #/bookでindex.html.erbを表示する際に必要(renderでindexを表示する際はいらない)
 
     @book = Book.new
 
@@ -58,7 +59,9 @@ end
 
 def update
     @book = Book.find(params[:id])
-    @book.user_id = current_user.id
+
+   #もしかしたら、↓の記述によって、存在しないuser_idがcreateのbookに入ったかもしれない
+   #@book.user_id = current_user.id
 
     #フラッシュメッセージ実装
     if @book.update(book_params)
