@@ -4,7 +4,6 @@ class UsersController < ApplicationController
    #https://tamata78.hatenablog.com/entry/2015/12/16/205728より、
    #↓他人のユーザ情報編集画面に遷移できない記述
 
-
    before_action :correct_user,   only: [:edit, :update]
 
   def show
@@ -55,7 +54,7 @@ class UsersController < ApplicationController
     def correct_user
       @user = User.find(params[:id])
       if current_user != @user
-       redirect_to user_path(@user)
+       redirect_to user_path(current_user.id)
       end
     end
 
