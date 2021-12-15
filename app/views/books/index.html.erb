@@ -18,8 +18,10 @@
         </tbody>
       </table>
       <div class="row">
-        <%= link_to "", edit_user_path(@user), class: "btn btn-outline-secondary btn-block fas fa-user-cog " %>
-      </div>
+            <%= link_to  edit_user_path(@user), class: "btn btn-outline-secondary btn-block" do  %>
+              <i class= "fas fa-user-cog"></i>
+            <% end %>
+        </div>
       <h2 class="mt-3">New book</h2>
       <%#@book_newだとparam is missing or the value is empty error
         が起こる　@bookにして解決%>
@@ -52,16 +54,18 @@
           <tbody>
             <tr>
               <td>
+                <%= link_to user_path(book.user.id) do %>
                 <%#　ユーザーのプロフィール画像を下記で表示しようとするとundefined method `get_profile_image' for nil:NilClas %>
                 <%#binding.pryでbook.userがnill %>
                 <%# 原因、binding.pryでbookの中身のuser_idが4という存在しないuserのidになっている %>
-                
+
                 <%# 解決法 rails db:migrate:resetをして、新規登録,投稿をやり直した %>
 
                 <%#binding.pryの際、入力出来なかったらqを入力 %>
 
                 <%# この部分に% binding.pry %を記述してbook, book.userの中身を確認してエラーを解決した %>
-                <%= image_tag book.user.get_profile_image %>
+                  <%= image_tag book.user.get_profile_image %>
+                <% end %>
               </td>
               <td>
                 <%= link_to book.title, book_path(book.id) %>

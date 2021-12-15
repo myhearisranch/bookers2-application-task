@@ -21,25 +21,67 @@
       </button>
       <div class="navbar-collapse collapse" id = "navbarNavDropdown" style>
         <ul class="navbar-nav ml-auto">
-            <% if user_signed_in? %>
-        <li>
-          <%= link_to "Home", user_path(current_user.id) %>
+
+        <%# リンクにfontawesomeを使う方法%>
+
+        <%# link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block edit_user_#{user.id}" do%>
+            <%#<i class="fas fa-user-cog"></i>">
+        <%# end %>
+
+
+
+      <% if user_signed_in? %>
+         <li>
+          <%= link_to user_path(current_user.id) ,class:  "nav-link text-light"  do %>
+            <i class="fas fa-home "></i>Home
+          <% end %>
         </li>
         <li>
-          <%= link_to "Users", users_path %>
+          <%= link_to  users_path ,class:  "nav-link text-light"  do %>
+           <i class="fas fa-users "></i>Users
+          <% end %>
         </li>
         <li>
-          <%= link_to "Books", books_path %>
+          <%= link_to  books_path , class:  "nav-link text-light" do %>
+           <i class="fas fa-book-open"></i>Books
+          <% end %>
         </li>
         <li>
-          <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+
+          <%# The action 'destroy' could not be found for UsersController %>
+          <%#他のエラー解決の為にconfig.sign_out_via = :delete を config.sign_out_via = :getにした %>
+          <%#これにより、rails routesで確認するとわかるがhttpメソッドがgetでsign_outすることになるので、method: :getにする必要がある %>
+
+          <%= link_to  destroy_user_session_path, method: :get , class:  "nav-link text-light" do %>
+            <i class="fas.fa-sign-out-alt"></i>Log out
+          <% end %>
         </li>
       <% else %>
+      <%# ↓の書き方だとundefined method `stringify_keys' for " path というエラーになります。 %>
+          <%#= link_to "Home", root_path do %>
+            <%# class="fas fa-home nav-link text-light"></i>
+          <% end %>
+
         <li>
-          <%= link_to "Sign up", new_user_registration_path %>
+          <%= link_to  root_path , class: "nav-link text-light" do %>
+            <i class="fas fa-home "></i>Home
+          <% end %>
         </li>
         <li>
-          <%= link_to "Log in", new_user_session_path %>
+          <%= link_to  home_about_path, class: "nav-link text-light" do %>
+           <i class="fas fa-link" ></i>About
+          <% end %>
+
+        </li>
+        <li>
+          <%= link_to  new_user_registration_path , class: "nav-link text-light" do %>
+           <i class="fas fa-user-plus"></i>Sign up
+          <% end %>
+        </li>
+        <li>
+          <%= link_to  new_user_session_path , class: "nav-link text-light" do %>
+           <i class="fas fa-sign-in-alt"></i>Log in
+          <% end %>
         </li>
         <% end %>
         </ul>
@@ -47,7 +89,7 @@
       </nav>
     </header>
 
-    <%#　ログイン、新規登録、ログアウトの場合、s↓の一行だけでフラッシュメッセージを実装出来る(コントローラーに何か記述する必要なし)　%>
+    <%# ログイン、新規登録、ログアウトの場合、s↓の一行だけでフラッシュメッセージを実装出来る(コントローラーに何か記述する必要なし) %>
     <%= flash[:notice] %>
     <%= yield %>
   </body>

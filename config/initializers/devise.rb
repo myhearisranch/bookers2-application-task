@@ -269,7 +269,8 @@ Devise.setup do |config|
 
   #Couldn't find User with 'id'=sign_outというエラーが出た
   #https://qiita.com/chisaki0606/items/f1f03a6c226e49b5f7b3というサイトより、
-  # config.sign_out_via = :deleteをconfig.sign_out_via = :getにして解決
+  # config.sign_out_via = :deleteをconfig.sign_out_via = :
+  #これにより、getでサインアウト可能になる
 
   config.sign_out_via = :get
 

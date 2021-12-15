@@ -66,7 +66,7 @@ def update
     #フラッシュメッセージ実装
     if @book.update(book_params)
         flash[:notice] = "You have updated user successfully."
-        redirect_to book_path(book.id)
+        redirect_to book_path(@book.id)
     else
         render :edit
     end
