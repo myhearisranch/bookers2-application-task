@@ -22,7 +22,21 @@
         </tbody>
       </table>
         <div class="row">
-            <%= link_to  edit_user_path(current_user.id), class: "btn btn-outline-secondary btn-block" do  %>
+            <%#
+            1) [STEP3] 仕上げのテスト 他人の画面のテスト 他人の投稿詳細画面のテスト サイドバーの確認 他人のユーザ編集画面へのリンクが存在する
+             Failure/Error: expect(page).to have_link '', href: edit_user_path(other_user)
+             expected to find link "" with href "/users/1/edit" but there were no matches
+             # ./spec/system/03_finishing_touches_spec.rb:248:in `block (5 levels) in <main>'
+
+            2) [STEP3] 仕上げのテスト 他人の画面のテスト 他人の投稿詳細画面のテスト サイドバーの確認 自分のユーザ編集画面へのリンクは存在しない
+             Failure/Error: expect(page).not_to have_link '', href: edit_user_path(user)
+             expected not to find visible link "" with href "/users/2/edit", found 1 match: ""
+             # ./spec/system/03_finishing_touches_spec.rb:255:in `block (5 levels) in <main>'
+            %>
+
+            <%# ↓のcurrent_user.idを@book.user.id にした%>
+
+            <%= link_to  edit_user_path(@book.user.id), class: "btn btn-outline-secondary btn-block" do  %>
               <i class= "fas fa-user-cog"></i>
             <% end %>
         </div>
