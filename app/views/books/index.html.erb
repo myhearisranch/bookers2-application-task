@@ -86,7 +86,23 @@
                 <%# ↓のbook.titleをbook.bodyにした %>
 
                 <%= book.body%>
+
               </td>
+                <% if book.favorited_by?(current_user) %>
+              <td>
+                <%= link_to book_favorites_path(book), method: :delete do %>
+                     <%= book.favorites.count %>
+                     <i class="fa fa-heart text-red" aria-hidden="true"></i>
+                    <% end %>
+              </td>
+              <% else %>
+              <td>
+                <%= link_to book_favorites_path(book), method: :post do %>
+                     <%= book.favorites.count %>
+                     <i class="fa fa-heart text-blue" aria-hidden="true" style="color: blue;"></i>
+                    <% end %>
+              </td>
+              <% end %>
             </tr>
           </tbody>
         <% end %>

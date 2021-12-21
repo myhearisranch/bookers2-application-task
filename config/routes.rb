@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   get "/home/about" => "homes#about"
 
 # resorces :userだとuninitialized constant UserControllerというエラーが出た
-  resources :books
+  resources :books, only: [:create, :show, :index, :edit, :destroy, :update] do
+    resource :favorites, only: [:create, :destroy]
+  end
   resources :users
 
 end
