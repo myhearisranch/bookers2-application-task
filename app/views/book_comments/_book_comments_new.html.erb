@@ -1,0 +1,5 @@
+ <%# 更新したい箇所を部分テンプレート化する%>
+ <%= form_with model: [@book, @book_comment] , local: false do |f| %>
+    <%= f.text_area :comment, rows: '5' %>
+    <%= f.submit "送信する" %>
+<% end %>
