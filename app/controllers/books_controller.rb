@@ -27,6 +27,7 @@ def show
 
     #@bookだと↑と混同してしまう
     @book_new = Book.new
+    @book_comment = BookComment.new
 end
 
 def index
