@@ -1,4 +1,5 @@
 <%# 部分テンプレートファイルを指定する %>
-$("#comments_area").html("<%= j(render 'book_comments', { book: @book}) %>")
 
-$("text_area").val('')
+$(".comments_area").html("<%= j(render 'book_comments', { book: @book}) %>")
+
+$("#book_comment_comment").val('')
