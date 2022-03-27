@@ -12,7 +12,7 @@
             <td>
               <%# No route matches {:action=>"destroy", :controller=>"book_comments", :id=>"1"}, missing required keys: [:book_id]%>
               <%# 名前付きルートにidを渡していなかった。 %>
-              <%= link_to "Destroy", book_book_comments_path(book_comment.id), method: :delete , remote: true , class: "btn btn-danger" %>
+              <%= link_to "Destroy", book_book_comments_path(book_comment.id), method: :delete ,remote: true ,class: "btn btn-danger"  %>
             </td>
         </tr>
      <% end %>

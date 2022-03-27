@@ -9,6 +9,8 @@ class BookCommentsController < ApplicationController
     end
     
     def destroy
+        refroute = Rails.application.routes.recognize_path(request.referrer)
+        @book = Book.find(refroute[:id])
         BookComment.find(params[:book_id]).destroy
         render :destroy
     end
