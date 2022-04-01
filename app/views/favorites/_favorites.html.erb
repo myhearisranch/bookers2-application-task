@@ -1,0 +1,18 @@
+<%# 更新させたい箇所を部分テンプレート化する %>
+
+<% if book.favorited_by?(current_user) %>
+
+    <%= link_to book_favorites_path(book), method: :delete , remote: true do %>
+      <%= book.favorites.count %>
+        <%# いいねでハートが赤くならない　style="color: red;"の記述忘れ%>
+        <i class="fa fa-heart text-red" aria-hidden="true" style="color: red;"></i>
+      <% end %>
+
+<% else %>
+
+    <%= link_to book_favorites_path(book), method: :post  , remote: true do %>
+      <%= book.favorites.count %>
+        <i class="fa fa-heart text-blue" aria-hidden="true" style="color: blue;"></i>
+    <% end %>
+
+<% end %>

@@ -80,31 +80,17 @@
               <td>
                 <%= @book.body %>
               </td>
-                <% if @book.favorited_by?(current_user) %>
+
               <td>
-                <%= link_to book_favorites_path(@book), method: :delete do %>
-                     <%= @book.favorites.count %>
-                     <i class="fa fa-heart text-red" aria-hidden="true"></i>
-                <% end %>
+                <div class ="favorite_buttons_<%= @book.id %>">
+                 <%= render "favorites/favorites", book: @book %>
+                </div>
               </td>
-                <% else %>
-              <td>
-                <%= link_to book_favorites_path(@book), method: :post do %>
-                     <%= @book.favorites.count %>
-                      <i class="fa fa-heart text-blue" aria-hidden="true" style="color: blue;"></i>
-                <% end %>
-              </td>
-              <% end %>
-              <td>
-                <% if @book.user == current_user %>
-                   <%= link_to "Edit", edit_book_path(@book.id) , class: "btn btn-success"%>
-                   <%= link_to "Destroy", book_path(@book.id), method: :delete, "data-confirm" => "本当に削除しますか？" , class: "btn btn-sm btn-danger"%>
-                <% end %>
-              </td>
+
             </tr>
           </tbody>
         </table>
-        
+
         <table>
            <% @book.book_comments.each do |book_comment| %>
           <tr>
@@ -116,20 +102,20 @@
               <%= book_comment.comment %>
             </td>
             <td>
-              
+
               <%# No route matches {:action=>"destroy", :controller=>"book_comments", :id=>"1"}, missing required keys: [:book_id]%>
               <%# 名前付きルートにidを渡していなかった。 %>
-              
+
               <%= link_to "Destroy", book_book_comments_path(book_comment.id), method: :delete , class: "btn btn-danger" %>
             </td>
           </tr>
           <% end %>
         </table>
-        
+
         <div class="comments_area">
           <%= render "book_comments/book_comments", book: @book %>
         </div>
         <%= render "book_comments/book_comments_new", book: @book, book_comment: @book_comments %>
-      
+
     </div>
 </div>
