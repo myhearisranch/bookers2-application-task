@@ -2,12 +2,25 @@
   <div class="row">
     <div class="col-md-3">
       <h2>User info</h2>
-      <%= image_tag @user.get_profile_image %>
+      <%= image_tag @user.get_profile_image(100,100) %>
       <table class="table">
         <tbody>
-          <tr></tr>
-          <tr><%= @user.name %></tr>
-          <tr><%= @user.introduction %></tr>
+          <tr>
+            <th>name</th>
+            <th><%= @user.name %></th>
+          </tr>
+          <tr>
+            <th>introduction</th>
+            <th><%= @user.introduction %></th>
+          </tr>
+          <tr>
+            <th>follows</th>
+            <th><%= link_to @user.followings.count , user_followings_path(@user.id) %></th>
+          </tr>
+          <tr>
+            <th>followers</th>
+            <th><%= link_to @user.followers.count , user_followers_path(@user.id) %></th>
+          </tr>
         </tbody>
       </table>
       <div class="row">
@@ -43,8 +56,19 @@
         <tbody>
           <% @users.each do |user| %>
           <tr>
-            <td> <%= image_tag user.get_profile_image %></td>
-            <td>  <%= user.name %></td>
+            <td><%= image_tag user.get_profile_image(100,100) %></td>
+            <td><%= user.name %></td>
+            <td>
+
+              <% if current_user.id != user.id %>
+                <% if current_user.following?(user) %>
+                  <%= link_to "フォロー外す", user_relationships_path(user.id), method: :delete  , class: "btn btn-info" %>
+                <% else %>
+                  <%= link_to "フォローする", user_relationships_path(user.id), method: :post  , class: "btn btn-success"%>
+                <% end %>
+              <% end %>
+
+            </td>
             <td><%= link_to "Show", user_path(user.id) %></td>
           </tr>
           <% end %>
