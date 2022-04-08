@@ -12,6 +12,53 @@ class UsersController < ApplicationController
 
     #bookだとエラーが出た
     @books = @user.books
+
+    #DM機能
+
+    #↓の2行で現在、ログインしているユーザーと「チャットへ」を
+    #押されたユーザーの両方をEntryテーブルに記録する。
+
+    @currentUserEntry = Entry.where(user_id: current_user.id)
+    @userEntry = Entry.where(user_id: @user.id)
+
+    #現在、ログインしているユーザーではない
+    unless @user.id == current_user.id
+
+     #roomsが作成されている場合とされていない場合で
+     #条件分岐させる
+
+     #roomsが既に作成されている時
+
+     #@currentUserEntryをeachを1つ1つ取り出す
+      @currentUserEntry.each do |cu|
+
+        #@userEntryをeachで1つ1つ取り出す
+        @userEntry.each do |u|
+
+          #room_idが共通しているユーザー同士に対して@roomId = cu.room_id
+          #という変数を指定する
+          #これにより,既に作成されているroom_idを特定できる
+          if cu.room_id == u.room_id then
+
+            #これがfalseの時、つまりRoomを作成する時の
+            #条件を記述をするためにに記述した。
+            @isRoom = true
+
+            @roomId = cu.room_id
+          end
+        end
+      end
+
+    #roomsが作成されている場合とされていない場合で
+    #条件分岐させる
+
+    #roomsが作成されていない時、roomsを作成する
+    unless @isRoom
+        @room = Room.new
+        @entry = Entry.new
+      end
+    end
+
   end
 
   def index
@@ -57,5 +104,4 @@ class UsersController < ApplicationController
        redirect_to user_path(current_user.id)
       end
     end
-
 end
