@@ -3,6 +3,7 @@ class CreateRooms < ActiveRecord::Migration[6.1]
     create_table :rooms do |t|
 
       t.timestamps
+      t.references :user
     end
   end
 end
