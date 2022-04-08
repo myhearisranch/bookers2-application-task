@@ -2,8 +2,10 @@ class Book < ApplicationRecord
  belongs_to :user
  #↓を書き忘れたらundefined local variable or method `favorites' for #<Book:0x00007f1ac40cd510>
  has_many :favorites
- 
+
  has_many :book_comments, dependent: :destroy
+
+ has_many :favorited_users, through: :favorites, source: :user
 
   validates :title, presence: true
 

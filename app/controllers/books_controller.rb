@@ -31,7 +31,16 @@ def show
 end
 
 def index
-    @books = Book.all
+
+    #過去1週間のいいね数順でランキング: https://qiita.com/ladkol2626/items/a673490af89d22aa3b0f?msclkid=5ded6c60b6e411ecb8f199ac712ec06d
+
+    to = Time.current.at_end_of_day
+    from = (to - 6.day).at_beginning_of_day
+
+    @books = Book.includes(:favorited_users).
+        sort_by{|x|
+            x.favorites.includes(:favorites).where(created_at: from...to).size
+        }.reverse
 
     #index.html.erb undifined method errors for nill
     #を解決する為に記述

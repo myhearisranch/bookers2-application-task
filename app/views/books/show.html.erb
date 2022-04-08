@@ -6,7 +6,7 @@
     <div class="col-md-3">
       <h2>User info</h2>
       <%#undefined method `get_profile_image' for nil:NilClass %>
-      <%= image_tag @book.user.get_profile_image %>
+      <%= image_tag @book.user.get_profile_image(100,100) %>
       <table class="table">
         <tbody>
           <tr>
@@ -18,6 +18,14 @@
             <th>introduction</th>
                 <%# undefined method `introduction' for nil:NilClass %>
             <th><%= @book.user.introduction %></th>
+          </tr>
+          <tr>
+            <th>follows</th>
+            <th><%= link_to @book.user.followings.count , user_followings_path(@book.user.id) %></th>
+          </tr>
+          <tr>
+            <th>followers</th>
+            <th><%= link_to @book.user.followers.count , user_followers_path(@book.user.id) %></th>
           </tr>
         </tbody>
       </table>
@@ -65,7 +73,7 @@
                 <%= link_to user_path(@book.user.id) do %>
 
                  <%#undefined method `get_profile_image' for nil:NilClass %>
-                 <%= image_tag @book.user.get_profile_image %><br>
+                 <%= image_tag @book.user.get_profile_image(100,100) %><br>
 
 
                   <%#undefined method `name' for nil:NilClass %>

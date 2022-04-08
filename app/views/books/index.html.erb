@@ -9,12 +9,25 @@
   <div class="row">
     <div class="col-md-3">
       <h2>User info</h2>
-      <%= image_tag @user.get_profile_image %>
+      <%= image_tag @user.get_profile_image(100,100)%>
       <table class="table">
         <tbody>
-          <tr></tr>
-          <tr><%= @user.name %></tr>
-          <tr><%= @user.introduction %></tr>
+          <tr>
+            <th>name</th>
+            <th><%= @user.name %></th>
+          </tr>
+          <tr>
+            <th>introduction</th>
+            <th><%= @user.introduction %></th>
+          </tr>
+          <tr>
+            <th>follows</th>
+            <th><%= link_to @user.followings.count , user_followings_path(@user.id) %></th>
+          </tr>
+          <tr>
+            <th>followers</th>
+            <th><%= link_to @user.followers.count , user_followers_path(@user.id) %></th>
+          </tr>
         </tbody>
       </table>
       <div class="row">
@@ -64,7 +77,7 @@
                 <%#binding.pryの際、入力出来なかったらqを入力 %>
 
                 <%# この部分に% binding.pry %を記述してbook, book.userの中身を確認してエラーを解決した %>
-                  <%= image_tag book.user.get_profile_image %>
+                  <%= image_tag book.user.get_profile_image(100,100) %>
                 <% end %>
               </td>
               <td>
