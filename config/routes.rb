@@ -18,4 +18,7 @@ Rails.application.routes.draw do
     get 'followers' => 'relationships#followers', as: 'followers'
   end
 
+  resorces :messages, only: [:create]
+  resorces :rooms, only: [:create, :show]
+
 end

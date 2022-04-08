@@ -23,6 +23,8 @@ class User < ApplicationRecord
   has_many :followers, through: :reverse_of_relationships, source: :follower
 
 
+  has_many :messages , dependent: :destroy
+  has_many :entries, dependent: :destroy
 
   # 1文字以上75文字以下の時は
   #validates :content, {length: {in: 1..75} }
